@@ -8,12 +8,12 @@ public class Raffle
     private int max;
     private boolean paramSet;
     private int[] winners = new int[NUM_WINNERS];
-    private boolean winnersSet;
+   // winnersSet is never used.
 
     public Raffle()
     {
         final int MIN_NUM_TICKETS = 3;
-        final int MIN_TICKET_NUMBER = 1; // min number is 1, not 0
+        final int MIN_TICKET_NUMBER = 0;
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Lowest ticket number: ");
@@ -33,11 +33,6 @@ public class Raffle
                 System.out.println("Must have at least 3 tickets!");
             }
             else break;
-            
-            if (max-min < MIN_TICKET_NUMBER) {    //Checks if the highest number is >0 and > the smallest number
-                System.out.println("The largest number must be greater than 0 " 
-					+ "and the smallest number.");
-            }
         }
         paramSet = true;
    } 
@@ -50,17 +45,17 @@ public class Raffle
             return;
         }
         Random rand = new Random();
-        winners[0] = rand.nextInt(max-min+1) + min; //the rand.nextInt(x) goes from 0 to x-1
-        winners[1] = rand.nextInt(max-min+1) + min;
-        winners[2] = rand.nextInt(max-min+1) + min;
+        winners[0] = rand.nextInt(max-min) + min; 
+        winners[1] = rand.nextInt(max-min) + min;
+        winners[2] = rand.nextInt(max-min) + min;
 
         while(winners[0] == winners[1] ||
                 winners[0] == winners[2] ||
                 winners[1] == winners[2])
         {
-            winners[0] = rand.nextInt(max - min + 1) + min;
-            winners[1] = rand.nextInt(max - min + 1) + min;
-            winners[2] = rand.nextInt(max - min + 1) + min;
+            winners[0] = rand.nextInt(max - min) + min;
+            winners[1] = rand.nextInt(max - min) + min;
+            winners[2] = rand.nextInt(max - min) + min;
         }
         System.out.printf("Winner1: %d\nWinner2: %d\nWinner3: %d\n", winners[0], winners[1], winners[2]);
     }
