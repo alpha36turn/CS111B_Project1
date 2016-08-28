@@ -20,18 +20,27 @@ public class Raffle
         min = -1;
         while(true) {
             min = sc.nextInt();
-            if (min <= MIN_TICKET_NUMBER) System.out.println("Lowest ticket number must be positive!"); 
+            if (min <= MIN_TICKET_NUMBER) {
+                 System.out.println("Lowest ticket number greater than 0!");     
+            }
             else break;
         }
 
         System.out.println("Highest ticket number: ");
         while(true) {
             max = sc.nextInt();
-            if (max-min < MIN_NUM_TICKETS) System.out.println("Must have at least 3 tickets!");
+            if (max-min < MIN_NUM_TICKETS) {
+                System.out.println("Must have at least 3 tickets!");
+            }
             else break;
+            
+            if (max-min < MIN_TICKET_NUMBER) {    //Checks if the highest number is >0 and > the smallest number
+                System.out.println("The largest number must be greater than 0 " 
+					+ "and the smallest number.");
+            }
         }
         paramSet = true;
-    }
+   } 
 
     public void draw()
     {
@@ -68,8 +77,8 @@ public class Raffle
         }
 
         int count = 0;
-        while (entryNum != winners[0] && entryNum != winners[1] && entryNum != winners[2]) {
-            count++; // we need to draw one winning number at a time
+        while (entryNum != winners[0]) { // we need to draw only one winning number at a time for the simulated draw
+            count++; 
             draw();
         }
         System.out.printf("A simulated drawing says you would have had to play %d times before winning.", count);
