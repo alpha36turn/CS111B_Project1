@@ -5,25 +5,28 @@ public class Play
 {
     public static void main(String[] args)
     {
+    	char keepGoing = 'y';
         Scanner scan = new Scanner(System.in);
-        char keepGoing = 'y';
-        Raffle r = new Raffle();
-       
-            r.draw();
-            r.simulate();
-            
-        while (keepGoing != 'n') {
-            System.out.println("\nDo you want to keep playing? (y/n)"); 
-            keepGoing = scan.nextLine().charAt(0);
-			
-            if(keepGoing == 'n') {
+    	
+    	while (keepGoing != 'n') {
+        
+		System.out.println("Lowest ticket number: ");
+		int min = Integer.parseInt(scan.nextLine());
+	
+		    
+		System.out.println("Highest ticket number: ");
+	        int max = Integer.parseInt(scan.nextLine());
+	        
+	        Raffle r = new Raffle(min, max);
+		       r.draw();
+		       r.simulate();	
+		        
+		System.out.println("\nDo you want to keep playing? (y/n)"); 
+	        keepGoing = scan.nextLine().charAt(0);
+				
+	        if(keepGoing == 'n') {
 				System.out.println("Goodbye!");
-				}	
-            else  {
-               r.draw();
-               r.simulate();
-            }
-            	
-       	}
+			}	        
+    	}
     }
 }
