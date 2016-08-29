@@ -10,32 +10,29 @@ public class Raffle
     private int[] winners = new int[NUM_WINNERS];
    // winnersSet is never used.
 
-    public Raffle()
+    public Raffle(int theMin, int theMax)
     {
         final int MIN_NUM_TICKETS = 3;
         final int MIN_TICKET_NUMBER = 0;
 
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Lowest ticket number: ");
-        min = -1;
-        while(true) {
-            min = sc.nextInt();
-            if (min <= MIN_TICKET_NUMBER) {
-                 System.out.println("Lowest ticket number greater than 0!");     
-            }
-            else break;
-        }
-
-        System.out.println("Highest ticket number: ");
-        while(true) {
-            max = sc.nextInt();
-            if (max-min < MIN_NUM_TICKETS) {
-                System.out.println("Must have at least 3 tickets!");
-            }
-            else break;
-        }
-        paramSet = true;
-   } 
+    	min = theMin;
+	    while(true) {
+	        if (min <= MIN_TICKET_NUMBER) {
+	             System.out.println("Lowest ticket number greater than 0!");     
+	        }
+	        else break;
+	    }
+    	
+    	max = theMax;
+	    while(true) {
+	        if (max-min < MIN_NUM_TICKETS) {
+	            System.out.println("Must have at least 3 tickets!");
+	        }
+	        else break;
+	    }
+    	
+    	paramSet = true;    
+    } 
 
     public void draw()
     {
@@ -64,6 +61,7 @@ public class Raffle
     {
         System.out.print("Enter your ticket number: ");
         Scanner sc = new Scanner(System.in);
+        Random rand = new Random();
         int entryNum = Integer.parseInt(sc.nextLine());
 
         if (entryNum == winners[0] || entryNum == winners[1] || entryNum == winners[2]) { 
@@ -71,11 +69,15 @@ public class Raffle
             return;
         }
 
-        int count = 0;
-        while (entryNum != winners[0]) { // we need to draw only one winning number at a time for the simulated draw
-            count++; 
-            draw();
-        }
-        System.out.printf("A simulated drawing says you would have had to play %d times before winning.", count);
+		int winner = rand.nextInt(max-min) + min;
+		int count = 1;
+		
+		while(entryNum != winner ) {
+			winner = rand.nextInt(max-min) + min;
+			count++;
+		}
+        
+        System.out.printf("You are not a winner.  Drawing one number at a time," + 
+        " it took %d draws before winning.", count);
     }
 }
