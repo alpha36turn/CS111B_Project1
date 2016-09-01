@@ -1,3 +1,8 @@
+/* To do's
+ * Fix error checking for min, max, and "enter your number"
+ * Try test cases
+*/
+
 package CS111B_Project1.src.main.java.com.mycompany.raffle;
 import java.util.*;
 
@@ -12,24 +17,21 @@ public class Raffle
 
     public Raffle(int theMin, int theMax)
     {
-        final int MIN_NUM_TICKETS = 3;
+    	Scanner sc = new Scanner(System.in);
+    	final int MIN_NUM_TICKETS = 4;
         final int MIN_TICKET_NUMBER = 0;
 
     	min = theMin;
-	    while(true) {
-	        if (min <= MIN_TICKET_NUMBER) {
-	             System.out.println("Lowest ticket number greater than 0!");     
-	        }
-	        else break;
-	    }
+		while (min <= MIN_TICKET_NUMBER) {
+			System.out.println("The number must be greater than 0.");
+			min = Integer.parseInt(sc.nextLine());
+		}
     	
     	max = theMax;
-	    while(true) {
-	        if (max-min < MIN_NUM_TICKETS) {
-	            System.out.println("Must have at least 3 tickets!");
-	        }
-	        else break;
-	    }
+	    while (max-min < MIN_NUM_TICKETS) {
+			max = Integer.parseInt(sc.nextLine());
+			System.out.println("The highest number must be at least 4 greater than the lowest.");
+		}
     	
     	paramSet = true;    
     } 
@@ -42,9 +44,9 @@ public class Raffle
             return;
         }
         Random rand = new Random();
-        winners[0] = rand.nextInt(max-min) + min; 
-        winners[1] = rand.nextInt(max-min) + min;
-        winners[2] = rand.nextInt(max-min) + min;
+        winners[0] = rand.nextInt(max - min + 1) + min; 
+        winners[1] = rand.nextInt(max - min + 1) + min;
+        winners[2] = rand.nextInt(max - min + 1) + min;
 
         while(winners[0] == winners[1] ||
                 winners[0] == winners[2] ||
@@ -69,11 +71,11 @@ public class Raffle
             return;
         }
 
-		int winner = rand.nextInt(max-min) + min;
+		int winner = rand.nextInt(max - min + 1) + min;
 		int count = 1;
 		
 		while(entryNum != winner ) {
-			winner = rand.nextInt(max-min) + min;
+			winner = rand.nextInt(max - min + 1) + min;
 			count++;
 		}
         
