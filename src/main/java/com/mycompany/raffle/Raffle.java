@@ -52,9 +52,9 @@ public class Raffle
                 winners[0] == winners[2] ||
                 winners[1] == winners[2])
         {
-            winners[0] = rand.nextInt(max - min) + min;
-            winners[1] = rand.nextInt(max - min) + min;
-            winners[2] = rand.nextInt(max - min) + min;
+            winners[0] = rand.nextInt(max - min + 1) + min;
+            winners[1] = rand.nextInt(max - min + 1) + min;
+            winners[2] = rand.nextInt(max - min + 1) + min;
         }
         System.out.printf("Winner1: %d\nWinner2: %d\nWinner3: %d\n", winners[0], winners[1], winners[2]);
     }
