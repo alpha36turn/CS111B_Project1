@@ -5,8 +5,14 @@ public class Play
 {
     public static void main(String[] args)
     {
-        Raffle r = new Raffle();
-        r.draw();
-        r.simulate();
+        Scanner sc = new Scanner(System.in);
+        char cont = 'y';
+        do {
+            Raffle r = new Raffle();
+            r.draw();
+            r.simulate();
+            System.out.println("Play again?");
+            cont = sc.nextLine().charAt(0);
+        } while (cont == 'y');
     }
 }
