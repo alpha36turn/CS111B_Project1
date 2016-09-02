@@ -4,9 +4,10 @@ import java.util.*;
 public class Raffle
 {
     private final int NUM_WINNERS = 3;
+    private boolean paramSet = false;
+
     private int min;
     private int max;
-    private boolean paramSet;
     private int[] winners = new int[NUM_WINNERS];
 
     public Raffle()
@@ -19,14 +20,16 @@ public class Raffle
         min = -1;
         while(true) {
             min = sc.nextInt();
-            if (min <= MIN_TICKET_NUMBER) System.out.println("Lowest ticket number must be positive!");
+            if (min <= MIN_TICKET_NUMBER)
+                System.out.println("Lowest ticket number must be positive!");
             else break;
         }
 
         System.out.println("Highest ticket number: ");
         while(true) {
             max = sc.nextInt();
-            if (max - min + 1 < MIN_NUM_TICKETS) System.out.println("Must have at least 3 tickets!");
+            if (max - min + 1 < MIN_NUM_TICKETS)
+                System.out.println("Must have at least 3 tickets!");
             else break;
         }
         paramSet = true;
@@ -53,12 +56,17 @@ public class Raffle
 
     public void simulate()
     {
+        if (!paramSet)
+        {
+            System.out.println("Run constructor to set Raffle parameters!");
+            return;
+        }
         System.out.print("Enter your ticket number: ");
         Scanner sc = new Scanner(System.in);
         int entryNum = Integer.parseInt(sc.nextLine());
 
         while(entryNum < min || entryNum > max) {
-            System.out.printf("Entry must be in the ticket range!!! (%d,%d)\n", min, max);
+            System.out.printf("Entry must be in the ticket range!!! [%d,%d]\n", min, max);
             entryNum = Integer.parseInt(sc.nextLine());
         }
 
