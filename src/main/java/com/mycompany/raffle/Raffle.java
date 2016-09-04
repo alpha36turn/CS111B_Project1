@@ -66,7 +66,7 @@ public class Raffle
         int entryNum = Integer.parseInt(sc.nextLine());
 
         while(entryNum < min || entryNum > max) {
-            System.out.printf("Entry must be in the ticket range!!! [%d,%d]\n", min, max);
+            System.out.printf("Entry must be in the ticket range!!! [%d,%d]\nEnter your ticket number: \n", min, max);
             entryNum = Integer.parseInt(sc.nextLine());
         }
 
