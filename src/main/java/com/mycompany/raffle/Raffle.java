@@ -21,7 +21,7 @@ public class Raffle
         while(true) {
             min = sc.nextInt();
             if (min <= MIN_TICKET_NUMBER)
-                System.out.println("Lowest ticket number must be positive!");
+                System.out.println("Lowest ticket number must be positive! \n Enter the lowest number: ");
             else break;
         }
 
@@ -29,7 +29,7 @@ public class Raffle
         while(true) {
             max = sc.nextInt();
             if (max - min + 1 < MIN_NUM_TICKETS)
-                System.out.println("Must have at least 3 tickets!");
+                System.out.println("Must have at least 3 tickets! \n Enter the highest number: ");
             else break;
         }
         paramSet = true;
